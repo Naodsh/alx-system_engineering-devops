@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Display headers
-echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND"
+echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT    START   TIME   COMMAND"
 
 # Retrieve processes and format the output
-ps -e -o user,pid,%cpu,%mem,vsz,rss,tty,stat,start,time,command | sed '1d'
+ps -eo user,pid,%cpu,%mem,vsz,rss,tty,stat,lstart,time,cmd --sort=start_time | sed '1d'
