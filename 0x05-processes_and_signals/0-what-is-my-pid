@@ -1,0 +1,4 @@
+#!/bin/bash
+# $$ is a special variable that holds the PID of the current process
+
+echo $$

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Get the process ID of 4-to_infinity_and_beyond
+pid=$(pgrep -f "4-to_infinity_and_beyond")
+
+if [ -n "$pid" ]; then
+    # Send SIGTERM signal to the process
+    kill -SIGTERM "$pid"
+    echo "Process terminated"
+else
+    echo "Process not found"
+fi
