@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Display the header for the process list
 printf "%-9s %-5s %-5s %-7s %-7s %-5s %-9s %-5s %-9s %s\n" \
