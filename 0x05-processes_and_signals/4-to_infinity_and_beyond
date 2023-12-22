@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Loop indefinitely and display the message
 while true
 do
