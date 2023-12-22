@@ -2,6 +2,6 @@
 
 # Find the PID and process name of processes containing the word 'bash'
 pgrep -f bash | while read -r pid; do
-    pname=$(ps -p "$pid" -o comm=)
+    pname=$(cat "/proc/$pid/comm")
     echo "$pid $pname"
 done
