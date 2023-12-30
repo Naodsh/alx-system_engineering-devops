@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# ash script that gives you information about the school file:
+# Bash script that gives you information about the school file:
 
 if [ -e "school" ]
 then
