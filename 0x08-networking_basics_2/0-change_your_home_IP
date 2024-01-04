@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Backup the original hosts file
+sudo cp /etc/hosts /etc/hosts.bak
+
+# Modify the hosts file to set localhost to 127.0.0.2 and facebook.com to 8.8.8.8
+sudo sed -i 's/127.0.0.1\tlocalhost/127.0.0.2\tlocalhost/' /etc/hosts
+sudo sed -i 's/\bfacebook.com\b/8.8.8.8\tfacebook.com/' /etc/hosts
+
+# Display the modified hosts file
+cat /etc/hosts
+
+# Restart networking to apply changes
+sudo service networking restart
