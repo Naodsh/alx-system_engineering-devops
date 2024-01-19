@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # Set the port to listen on
-port=98
+#port=98
 
 # Start listening on the specified port
-while true; do
-	{ echo -ne "HTTP/1.1 200 OK\r\nContent-Length: $(date | wc -c)\r\n\r\n$(date)"; } | nc -l -p $port
+#while true; do
+#	{ echo -ne "HTTP/1.1 200 OK\r\nContent-Length: $(date | wc -c)\r\n\r\n$(date)"; } | nc -l $port
 #	wc -c | nc -l -p $port
-done
+#done
+nc -l localhost 98
