@@ -4,6 +4,6 @@ port=98
 
 # Start listening on the specified port
 while true; do
-# { echo -ne "HTTP/1.1 200 OK\r\nContent-Length: $(date | wc -c)\r\n\r\n$(date)"; } | nc -l -p $port
-	wc -c | nc -l -p $port
+	{ echo -ne "HTTP/1.1 200 OK\r\nContent-Length: $(date | wc -c)\r\n\r\n$(date)"; } | nc -l -p $port
+#	wc -c | nc -l -p $port
 done
