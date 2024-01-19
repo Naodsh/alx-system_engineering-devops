@@ -4,5 +4,5 @@ port=98
 
 # Start listening on the specified port
 while true; do
-	(echo -ne) | nc -l -p $port
+	echo | nc -l -p $port
 done
