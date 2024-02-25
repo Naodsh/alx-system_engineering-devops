@@ -1,5 +1,4 @@
-#!/bin/bash
-#
+#!/usr/bin/env bash
 ## Replace "server01" and "8.8.8.8" with your actual server hostname or IP address
 #server="server01"
 ip_address="8.8.8.8"
