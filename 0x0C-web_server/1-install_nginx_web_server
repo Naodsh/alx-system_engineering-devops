@@ -1,24 +1,26 @@
 #!/usr/bin/env bash
-# install Nginx
-apt-get update
-apt-get install -y nginx
+# Install Nginx
 
-# Configure Nginx to listen on port 80
-echo "server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    root /var/www/html;
-    index index.html;
-    server_name _;
+apt-get update -y
+apt-get install nginx -y
 
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
+# Check if Nginx is installed
+if ! command -v nginx &> /dev/null; then
+    echo "Nginx installation failed"
+    exit 1
+fi
 
-    location = / {
-        echo 'Hello World!';
-    }
-}" > /etc/nginx/sites-available/default
+# Create default index.html with "Hello World!"
+echo "Hello World!" > /var/www/html/index.html
 
-# Reload Nginx configuration
-service nginx reload
+# Restart Nginx
+killall -s HUP nginx
+
+# Verify Nginx is running and serving the correct content
+response=$(curl -s localhost)
+if [ "$response" != "Hello World!" ]; then
+    echo "Nginx is not serving the correct content"
+    exit 1
+fi
+
+echo "Nginx installed and configured successfully"
