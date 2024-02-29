@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # Install Nginx if not already installed
 
-apt-get update -y
-apt-get install nginx -y
+sudo apt-get update -y
+sudo apt-get install nginx -y
 
 # Create a configuration file for the redirection
-cat > /etc/nginx/sites-available/redirect_me <<EOF
+sudo cat > /etc/nginx/sites-available/redirect_me <<EOF
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
@@ -21,9 +21,9 @@ server {
 EOF
 
 # Enable the configuration by creating a symbolic link
-ln -s /etc/nginx/sites-available/redirect_me /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/redirect_me /etc/nginx/sites-enabled/
 
 # Restart Nginx to apply changes
-killall -s HUP nginx
+sudo killall -s HUP nginx
 
-echo "Redirection configured successfully"
+sudo echo "Redirection configured successfully"
