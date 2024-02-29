@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 # Install Nginx if not already installed
 
-if ! command -v nginx &> /dev/null; then
-    apt-get update -y
-    apt-get install nginx -y
-fi
+apt-get update -y
+apt-get install nginx -y
 
 # Create a configuration file for the redirection
 cat > /etc/nginx/sites-available/redirect_me <<EOF
