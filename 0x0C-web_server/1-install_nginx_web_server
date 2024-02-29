@@ -1,26 +1,27 @@
 #!/usr/bin/env bash
 # Install Nginx
+# Update package list and install nginx
+sudo apt-get update -y
+sudo apt-get install -y nginx
 
-apt-get update -y
-apt-get install nginx -y
+# Make sure Nginx is running
+sudo service nginx start
 
-# Check if Nginx is installed
-if ! command -v nginx &> /dev/null; then
-    echo "Nginx installation failed"
-    exit 1
-fi
+# Create a basic HTML page with "Hello World!"
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
-# Create default index.html with "Hello World!"
-echo "Hello World!" > /var/www/html/index.html
+# Configure Nginx to serve the custom HTML page
+sudo bash -c 'echo "server
+{
+	listen 80;
+	server_name localhost;
+	location /
+	{
+		root /var/www/html;
+		index index.html;
+	}
+}" > /etc/nginx/sites-available/default'
 
-# Restart Nginx
-killall -s HUP nginx
-
-# Verify Nginx is running and serving the correct content
-response=$(curl -s localhost)
-if [ "$response" != "Hello World!" ]; then
-    echo "Nginx is not serving the correct content"
-    exit 1
-fi
-
-echo "Nginx installed and configured successfully"
+# Restart Nginx without using systemctl
+sudo kill -s HUP $(cat /var/run/nginx.pid)
+# End of script
