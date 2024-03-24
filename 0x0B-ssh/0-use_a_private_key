@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-## Replace "server01" and "8.8.8.8" with your actual server hostname or IP address
-#server="server01"
-ip_address="8.8.8.8"
+# Bash script that uses ssh to connect to your server using
+# the private key ~/.ssh/school with the user ubuntu.
+ip_address="34.201.68.191"
 
 ## Use ssh with the private key and connect to the server
 ssh -i ~/.ssh/school ubuntu@$ip_address
