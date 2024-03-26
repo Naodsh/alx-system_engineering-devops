@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Script to install Nginx on the server
+
+# Install nginx with -y flag for automatic confirmation
+apt-get update
+apt-get install -y nginx
+
+# Ensure nginx is listening on port 80
+sed -i 's/^\(.*listen\s*\)80/\180/' /etc/nginx/sites-available/default
+
+# Restart nginx without using systemctl
+/etc/init.d/nginx restart
+
+# Create index.html with "Hello World!" message
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
+
+# Check if nginx is running
+nginx_status=$(ps aux | grep nginx | grep -v grep)
+
+if [ -z "$nginx_status" ]; then
+    echo "Nginx is not running"
+    exit 1
+fi
