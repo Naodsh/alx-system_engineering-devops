@@ -12,7 +12,7 @@ sed -i 's/^\(.*listen\s*\)80/\180/' /etc/nginx/sites-available/default
 /etc/init.d/nginx restart
 
 # Create index.html with "Hello World!" message
-echo "Hello World!" > /usr/share/nginx/html/index.html
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
 
 # Check if nginx is running
 nginx_status=$(ps aux | grep nginx | grep -v grep)
