@@ -1,27 +1,33 @@
 #!/usr/bin/env bash
-# Script to install Nginx on the server
+#!/bin/bash
 
-# Install nginx with -y flag for automatic confirmation
-apt-get update
-apt-get install -y nginx
+# Check if nginx is installed
+if ! [ -x "$(command -v nginx)" ]; then
+  echo 'Error: nginx is not installed.' >&2
+  exit 1
+fi
 
-# Ensure nginx is listening on port 80
-sed -i 's/^\(.*listen\s*\)80/\180/' /etc/nginx/sites-available/default
+# Define the configuration file path
+config_file="/etc/nginx/sites-available/default"
 
-# Restart nginx without using systemctl
+# Check if the configuration file exists
+if [ ! -f "$config_file" ]; then
+  echo "Error: Nginx configuration file $config_file not found." >&2
+  exit 1
+fi
+
+# Backup the original configuration file
+cp "$config_file" "$config_file.bak"
+
+# Define the redirection configuration
+redirection_config="location /redirect_me {
+    return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+}"
+
+# Use sed to replace the appropriate line with the redirection configuration
+sed -i "/^.*listen.*$/a $redirection_config" "$config_file"
+
+# Restart nginx
 /etc/init.d/nginx restart
 
-# Create index.html with "Hello World!" message
-echo "Hello World!" > /var/www/html/index.nginx-debian.html
-
-# Check if nginx is running
-if pgrep -x "nginx" >/dev/null; then
-    nginx_status="Nginx is running"
-else
-    nginx_status="Nginx is not running"
-fi
-
-if [ -z "$nginx_status" ]; then
-    echo "Nginx is not running"
-    exit 1
-fi
+echo "Redirection configured successfully."
