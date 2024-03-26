@@ -15,7 +15,11 @@ sed -i 's/^\(.*listen\s*\)80/\180/' /etc/nginx/sites-available/default
 echo "Hello World!" > /var/www/html/index.nginx-debian.html
 
 # Check if nginx is running
-nginx_status=$(ps aux | grep nginx | grep -v grep)
+if pgrep -x "nginx" >/dev/null; then
+    nginx_status="Nginx is running"
+else
+    nginx_status="Nginx is not running"
+fi
 
 if [ -z "$nginx_status" ]; then
     echo "Nginx is not running"
