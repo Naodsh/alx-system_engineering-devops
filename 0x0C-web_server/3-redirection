@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-#!/bin/bash
 
 # Check if nginx is installed
 if ! [ -x "$(command -v nginx)" ]; then
@@ -25,7 +24,7 @@ redirection_config="location /redirect_me {
 }"
 
 # Use sed to replace the appropriate line with the redirection configuration
-sed -i "/^.*listen.*$/a $redirection_config" "$config_file"
+sed -i '/^.*listen.*$/a $redirection_config' '$config_file'
 
 # Restart nginx
 /etc/init.d/nginx restart
