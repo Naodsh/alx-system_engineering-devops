@@ -4,12 +4,6 @@ apt-get update
 apt-get install -y nginx
 
 # Define the redirection configuration
-# redirection_config="#redirect to other page\n\tlocation /redirect_me {\\n\t\trewrite ^ 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}"
-
-# Use sed to add the redirection configuration into the Nginx default server block
-# sed -i "/server_name _;/a $redirection_config" /etc/nginx/sites-available/default
-
-# Define the redirection configuration
 redirection_config="\\n\tlocation /redirect_me {\\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\\n\t}"
 
 # Use sed to replace the default server block configuration with the redirection configuration
@@ -17,7 +11,4 @@ sed -i "/server_name _;/c\server_name _;\n$redirection_config" /etc/nginx/sites-
 
 
 # Restart nginx without using systemctl
-# kill -s HUP $(cat /var/run/nginx.pid)
-sudo killall -s HUP nginx
-
-# End of script
+/etc/init.d/nginx restart
