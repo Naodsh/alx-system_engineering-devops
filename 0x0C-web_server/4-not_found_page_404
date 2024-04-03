@@ -6,6 +6,8 @@ sudo apt update
 # Install Nginx
 sudo apt install nginx -y
 
+echo " Ceci n'est pas une page " > /var/www/html/404.html
+
 # Define the redirection for page not found configuration
 redirection_config="\# Custom 404 error page\n\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\tinternal;\n\t}"
 
