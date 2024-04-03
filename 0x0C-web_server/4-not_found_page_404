@@ -26,4 +26,5 @@ sudo sh -c 'echo "server {
 
 # Restart Nginx to apply changes
 # sudo systemctl restart nginx
-sudo nginx -s reload
+# sudo nginx -s reload
+/etc/init.d/nginx restart
