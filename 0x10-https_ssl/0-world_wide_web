@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Function to retrieve DNS information for a specific subdomain
+get_dns_info() {
+    local domain="$1"
+    local subdomain="$2"
+    dig_output=$(dig $subdomain.$domain | awk '/ANSWER SECTION/ {getline; print}')
+    if [[ -n "$dig_output" ]]; then
+        echo "The subdomain $subdomain is a $(echo $dig_output | awk '{print $4}') record and points to $(echo $dig_output | awk '{print $5}')"
+    else
+        echo "No record found for subdomain $subdomain"
+    fi
+}
+
+# Main function to handle script arguments
+main() {
+    local domain="$1"
+    local subdomain="$2"
+
+    if [[ -z "$subdomain" ]]; then
+        # When only domain is provided, fetch information for default subdomains
+        default_subdomains=("www" "lb-01" "web-01" "web-02")
+        for sub in "${default_subdomains[@]}"; do
+            get_dns_info "$domain" "$sub"
+        done
+    else
+        # When both domain and subdomain are provided, fetch information for the specified subdomain
+        get_dns_info "$domain" "$subdomain"
+    fi
+}
+
+# Check if both domain and subdomain parameters are provided
+if [[ $# -lt 1 ]]; then
+    echo "Usage: $0 <domain> [<subdomain>]"
+    exit 1
+fi
+
+main "$1" "$2"
