@@ -3,9 +3,9 @@
 get_dns_info() {
     local domain="$1"
     local subdomain="$2"
-    dig_output=$(dig $subdomain.$domain | awk '/ANSWER SECTION/ {getline; print}')
+    dig_output=$(dig "$subdomain"."$domain" | awk '/ANSWER SECTION/ {getline; print}')
     if [[ -n "$dig_output" ]]; then
-        echo "The subdomain $subdomain is a $(echo $dig_output | awk '{print $4}') record and points to $(echo $dig_output | awk '{print $5}')"
+        echo "The subdomain $subdomain is a $(echo "$dig_output" | awk '{print $4}') record and points to $(echo "$dig_output" | awk '{print $5}')"
     else
         echo "No record found for subdomain $subdomain"
     fi
