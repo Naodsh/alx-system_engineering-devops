@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# 1-install_load_balancer
+apt update
+apt install -y haproxy
+
+sudo tee -a /etc/haproxy/haproxy.cfg > /dev/null <<'EOF'
+
+frontend http_front
+    bind *:80
+    stats uri /haproxy?stats
+    default_backend http_back
+
+backend http_back
+    balance roundrobin
+    server 463594-web-01 52.91.184.90:80
+    server 463594-web-02 35.174.211.198:80
+EOF
+
+# Enable HAProxy service
+sudo systemctl enable haproxy
+
+# Start HAProxy service
+sudo systemctl start haproxy
+
+# Verify HAProxy status
+sudo systemctl status haproxy
