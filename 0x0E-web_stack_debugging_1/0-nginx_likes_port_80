@@ -9,6 +9,7 @@ else
 	sed -i 's/\(listen \)80;/\180;/' /etc/nginx/sites-available/default
 
 	# Restart Nginx service
-	/etc/init.d/nginx restart
+	# /etc/init.d/nginx restart
+	systemctl restart nginx
 	echo "Nginx has been configured to listen on port 80."
 fi
