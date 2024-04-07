@@ -2,13 +2,11 @@
 # This script checks if Nginx is configured to listen on port 80. If not, it updates the configuration to listen on port 80 and restarts the Nginx service.
 
 # Check if Nginx is already configured to listen on port 80
-if netstat -tuln | grep -q ':80 '; then
+if grep -q "listen\s*80" /etc/nginx/sites-available/default; then
 	echo "Nginx is already listening on port 80."
 else
 	# Update Nginx configuration to listen on port 80
 	sed -i 's/\(listen \)80;/\180;/' /etc/nginx/sites-available/default
-
-	# Restart Nginx service
 	# /etc/init.d/nginx restart
 	systemctl restart nginx
 	echo "Nginx has been configured to listen on port 80."
