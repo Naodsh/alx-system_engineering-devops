@@ -2,8 +2,13 @@
 # This script checks if Nginx is configured to listen on port 80. If not, it updates the configuration to listen on port 80 and restarts the Nginx service.
 
 # Check if Nginx is already configured to listen on port 80
-# start Nginx
+#install Nginx
+# sudo apt update
+# sudo apt install nginx -y
 service nginx start
 if ! (grep -q "listen\s*80" /etc/nginx/sites-available/default) then
 	sed -i 's/\(listen \)80;/\180;/' /etc/nginx/sites-available/default
+       	/etc/init.d/nginx restart
+else
+	echo "Nginx runing and listen to port 80"
 fi
