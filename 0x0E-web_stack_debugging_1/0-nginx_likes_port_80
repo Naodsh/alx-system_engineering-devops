@@ -7,8 +7,9 @@
 # sudo apt install nginx -y
 service nginx start
 if ! (grep -q "listen\s*80" /etc/nginx/sites-available/default) then
-	sed -i 's/\(listen \)80;/\180;/' /etc/nginx/sites-available/default
-       	/etc/init.d/nginx restart
+#	sed -i 's/\(listen \)80;/\180;/' /etc/nginx/sites-available/default
+#       	/etc/init.d/nginx restart
+	service nginx start
 else
 	echo "Nginx runing and listen to port 80"
 fi
