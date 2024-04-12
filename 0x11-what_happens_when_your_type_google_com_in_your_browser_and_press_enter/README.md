@@ -1,4 +1,4 @@
-#### What happens when you type google.com in your browser and press Enter ####
+# What happens when you type google.com in your browser and press Enter #
 
 ### DNS request: ###
 When you type a URL into your browser, the first thing that happens is a DNS (Domain Name System) request. The browser sends a request to a DNS server to translate the human-readable domain name (like "google.com") into an IP address, which is needed to locate the server on the internet.
