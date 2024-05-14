@@ -2,6 +2,6 @@
 # web stuck
 sudo service nginx stop
 chmod 644 /etc/nginx/nginx.conf
-sed -i 's/user\s*www-data;/user nginx;/' /etc/nginx/nginx.conf
-sed -i 's/listen\s*80;/listen 8080;/g' /etc/nginx/sites-available/default
+sed -i 's/user\s*www-data/user nginx/' /etc/nginx/nginx.conf
+sed -i 's/listen\s*80/listen 8080/g' /etc/nginx/sites-available/default
 sudo -u nginx service nginx start
