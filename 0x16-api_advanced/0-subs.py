@@ -1,30 +1,38 @@
 #!/usr/bin/python3
-"""Function to query subscribers on a given Reddit subreddit."""
-
+"""
+This module provides a function to query the Reddit API and return the number
+of subscribers for a given subreddit. If an invalid subreddit is given, the
+function returns 0.
+"""
 
 import requests
 
 
 def number_of_subscribers(subreddit):
-    """Return the total number of subscribers on a given subreddit."""
-    # Define the URL for the subreddit's about.json endpoint
+    """
+    Queries the Reddit API and returns the number of subscribers for a given subreddit.
+
+    Args:
+        subreddit (str): The name of the subreddit to query.
+
+    Returns:
+        int: The number of subscribers for the subreddit, or 0 if the subreddit is invalid.
+    """
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    # Define headers to set a custom User-Agent
-    headers = {'User-Agent': 'MyRedditClient/0.1'}
+    headers = {'User-Agent': 'my-reddit-client/0.1 (by /u/Naod)'}
 
     try:
-        # Make the GET request to the Reddit API
         response = requests.get(url, headers=headers, allow_redirects=False)
+        
+        # Debugging information
+        print(f"Status Code: {response.status_code}")
+        #print(f"Response Content: {response.text}")
 
-        # Check if the request was successful
         if response.status_code == 200:
-            # Parse the JSON response
             data = response.json()
-            # Extract and return the number of subscribers
             return data['data']['subscribers']
         else:
-            # Return 0 for any unsuccessful requests
             return 0
-    except requests.RequestException:
-        # Return 0 if there is a request exception
+    except requests.RequestException as e:
+        print(f"RequestException: {e}")
         return 0
