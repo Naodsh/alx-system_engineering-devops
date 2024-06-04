@@ -19,7 +19,9 @@ def number_of_subscribers(subreddit):
         int: The number of subscribers for the subreddit, or 0 if the subreddit is invalid.
     """
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    headers = {'User-Agent': 'my-reddit-client/0.1 (by /u/Naod)'}
+    headers = {
+        'User-Agent': 'reddit-subscriber-counter/0.1 by u/UnfairArtist8484',
+    }
 
     try:
         response = requests.get(url, headers=headers, allow_redirects=False)
@@ -30,7 +32,7 @@ def number_of_subscribers(subreddit):
 
         if response.status_code == 200:
             data = response.json()
-            return data['data']['subscribers']
+            return data['data']['subscriber']
         else:
             return 0
     except requests.RequestException as e:
