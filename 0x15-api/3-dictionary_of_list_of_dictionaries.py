@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+my_module.py
+This module contains a simple function to demonstrate the project setup.
+"""
 import requests
 import json
 
