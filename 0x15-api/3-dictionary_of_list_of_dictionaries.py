@@ -3,8 +3,8 @@
 my_module.py
 This module contains a simple function to demonstrate the project setup.
 """
-import requests
 import json
+import requests
 
 # Define the URLs for users and tasks
 users_url = "https://jsonplaceholder.typicode.com/users"
