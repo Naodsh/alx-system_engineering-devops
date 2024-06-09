@@ -1,17 +1,8 @@
 #!/usr/bin/env bash
-# Install Nginx
-apt-get update
-apt-get install -y nginx
-
-chmod 644 /etc/nginx/nginx.conf
-
-# Replace user in nginx.conf
-sed -i 's/user\s*www-data;/user nginx;/' /etc/nginx/nginx.conf
-
 # Modify Nginx default configuration to listen on port 8080
-sed -i 's/listen\s*80;/listen 8080;/g' /etc/nginx/sites-available/default
 
-pkill apache2
-
-# Restart Nginx to apply changes
+pkill -f apache2
+chown nginx:nginx /etc/nginx/nginx.conf
+chmod 700 /etc/nginx/nginx.conf
+sed -i 's/80 default_server/8080 default_server/' /etc/nginx/sites-available/default
 sudo -u nginx service nginx start
