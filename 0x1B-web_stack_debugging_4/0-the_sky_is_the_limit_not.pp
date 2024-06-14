@@ -1,3 +1,4 @@
+# webstuck deb
 class nginx_optimization {
   package { 'nginx':
     ensure => installed,
