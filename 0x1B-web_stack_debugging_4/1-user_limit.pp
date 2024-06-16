@@ -1,17 +1,12 @@
-# to increase the file descriptor limits for the user
-
-file { '/etc/security/limits.d/holberton.conf':
-  ensure  => file,
-  content => "holberton soft nofile 4096\nholberton hard nofile 4096\n",
-  mode    => '0644',
+# increase hard file limit for user holberton
+exec { 'increase-hard-file-limit-for-holberton-user':
+  command => 'sed -i "/holberton hard/s/5/50000/" /etc/security/limits.conf',
+  path    => '/usr/local/bin/:/bin/'
 }
 
-exec { 'increase-system-file-limits':
-  command => 'sysctl -w fs.file-max=100000',
-  unless  => 'sysctl -n fs.file-max | grep -q 100000',
+# Increase soft file limit for user holberton
+exec { 'increase-soft-file-limit-for-holberton-user':
+  command => 'sed -i "/holberton soft/s/4/50000/" /etc/security/limits.conf',
+  path    => '/usr/local/bin/:/bin/'
 }
 
-exec { 'increase-pam-limits':
-  command => 'echo "session required pam_limits.so" >> /etc/pam.d/common-session',
-  unless  => 'grep -q "session required pam_limits.so" /etc/pam.d/common-session',
-}
